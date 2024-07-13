@@ -65,3 +65,11 @@ def save_installer(installer_data):
         file.write(installer_data)
     
     return installer_path
+
+def run_installer(installer_path):
+    
+    subprocess.run([installer_path, '/L=1033', '/S'])
+
+def delete_installer(installer_path):
+   
+    os.remove(installer_path)
