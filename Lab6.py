@@ -48,3 +48,6 @@ def download_installer():
     if resp_msg.status_code == requests.codes.ok:
         return resp_msg.content  
     return None
+def installer_ok(installer_data, expected_sha256):
+    computed_sha256 = hashlib.sha256(installer_data).hexdigest()
+    return computed_sha256 == expected_sha256
