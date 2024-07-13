@@ -73,3 +73,33 @@ def run_installer(installer_path):
 def delete_installer(installer_path):
    
     os.remove(installer_path)
+
+def main():
+    
+    expected_sha256 = get_expected_sha256()
+    
+    if not expected_sha256:
+        print('Failed to get  value.')
+        return
+    
+    
+    installer_data = download_installer()
+    
+    if not installer_data:
+        print('Failed to download the VLC installer')
+        return
+    
+    
+    if installer_ok(installer_data, expected_sha256):
+        
+        installer_path = save_installer(installer_data)
+        
+       
+        run_installer(installer_path)
+        
+        delete_installer(installer_path)
+    else:
+        print('The downloaded installer is corrupted.')
+
+if __name__ == '__main__':
+    main()
