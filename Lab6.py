@@ -49,5 +49,19 @@ def download_installer():
         return resp_msg.content  
     return None
 def installer_ok(installer_data, expected_sha256):
+
     computed_sha256 = hashlib.sha256(installer_data).hexdigest()
+
     return computed_sha256 == expected_sha256
+
+def save_installer(installer_data):
+    
+    temp_folder = os.getenv('TEMP')
+    
+    
+    installer_path = os.path.join(temp_folder, 'vlc-3.0.17.4-win64.exe')
+    
+    with open(installer_path, 'wb') as file:
+        file.write(installer_data)
+    
+    return installer_path
