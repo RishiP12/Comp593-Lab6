@@ -32,3 +32,19 @@ def get_expected_sha256():
         print("Response content:", resp_msg.text)
     
     return None
+
+def download_installer():
+    
+    installer_url = 'http://download.videolan.org/pub/videolan/vlc/3.0.17.4/win64/vlc-3.0.17.4-win64.exe'
+    print(f"Trying to download the installer")
+    
+    try:
+        resp_msg = requests.get(installer_url)
+    except Exception as e:
+        print(f"Error occurred while trying to download the installer")
+        return None
+    
+    
+    if resp_msg.status_code == requests.codes.ok:
+        return resp_msg.content  
+    return None
